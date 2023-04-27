@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Admin = () => {
+const Meals = () => {
   return (
     <div>
       {/* <Sidebar />
@@ -9,4 +9,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Meals;
