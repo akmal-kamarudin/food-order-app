@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import "../App.css";
 import { Grid, Button, Box } from "@mui/material";
 import logo from "../images/logo.png";
+import { grey } from "@mui/material/colors";
 
 const Footer = () => {
   return (
@@ -35,8 +37,7 @@ const Footer = () => {
             size="medium"
             type="submit"
             sx={{
-              width: "12ch",
-              textTransform: "capitalize",
+              width: "15ch",
             }}
           >
             Admin

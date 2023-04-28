@@ -11,13 +11,13 @@ const Banner = () => {
           sx={{
             backgroundSize: "cover",
             backgroundPosition: "center",
-            // height: 787,
-            // width: "auto",
-            opacity: 0.9,
+            maxHeight: 1080,
+            maxWidth: 1920,
+            opacity: 0.7,
             // position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
+            // top: 0,
+            // left: 0,
+            // right: 0,
           }}
           alt="App-logo"
           src={banner}
