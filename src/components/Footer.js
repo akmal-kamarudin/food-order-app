@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
-import { Grid, Button, Box } from "@mui/material";
+import LightButton from "../styles/LightButton";
+import { Grid, Button, Box, Typography } from "@mui/material";
 import logo from "../images/logo.png";
-import { grey } from "@mui/material/colors";
 
 const Footer = () => {
   return (
@@ -31,7 +31,7 @@ const Footer = () => {
           />
         </Grid>
         <Grid>
-          <Button
+          <LightButton
             variant="contained"
             color="primary"
             size="medium"
@@ -40,8 +40,10 @@ const Footer = () => {
               width: "15ch",
             }}
           >
-            Admin
-          </Button>
+            <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+              Admin
+            </Typography>
+          </LightButton>
         </Grid>
       </Grid>
     </>

@@ -4,7 +4,7 @@ import { CartProvider } from "../context/CartProvider";
 import Banner from "../components/Banner";
 import AboutUs from "../components/AboutUs";
 import Meals from "../components/Meals";
-import AppBar from "../styles/CartAppbar";
+import AppBar from "../components/CartAppbar";
 
 const Users = () => {
   const [isValid, setIsValid] = useState(false);
@@ -13,6 +13,12 @@ const Users = () => {
     <>
       <AppBar />
       <Banner />
+      <section>
+        <AboutUs />
+        <div style={{ marginTop: "15rem" }}>
+          <Meals />
+        </div>
+      </section>
     </>
     // <CartProvider>
     //   <AppBar />
