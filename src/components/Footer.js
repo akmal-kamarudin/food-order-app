@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
+import ItemsContext from "../context/ItemsContext";
 import "../App.css";
 import LightButton from "../styles/LightButton";
-import { Grid, Button, Box, Typography } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 import logo from "../images/logo.png";
 
 const Footer = () => {
+  const { switchPage, togglePage } = useContext(ItemsContext);
+
+  const switchPageHandler = (e) => {
+    e.preventDefault();
+    togglePage(switchPage);
+  };
+
   return (
     <>
       <Grid
@@ -22,8 +30,20 @@ const Footer = () => {
           <Box
             component="img"
             sx={{
-              height: 300,
-              width: 424,
+              // height: {
+              //   xs: "30%",
+              //   md: "60%",
+              //   lg: "100%",
+              // },
+              // width: {
+              //   xs: "30%",
+              //   md: "60%",
+              //   lg: "100%",
+              // },
+              height: "auto",
+              width: "auto",
+              maxHeight: 300,
+              maxWidth: 424,
               py: 2,
             }}
             alt="App-logo"
@@ -38,10 +58,26 @@ const Footer = () => {
             type="submit"
             sx={{
               width: "15ch",
+              fontSize: {
+                xs: "0.6rem",
+                md: "0.8rem",
+                lg: "1rem",
+              },
             }}
+            onClick={switchPageHandler}
           >
-            <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
-              Admin
+            <Typography
+              variant="subtitle2"
+              sx={{
+                fontWeight: "bold",
+                fontSize: {
+                  xs: "0.6rem",
+                  md: "0.8rem",
+                  lg: "1rem",
+                },
+              }}
+            >
+              {switchPage === "/" ? "User" : "Admin"}
             </Typography>
           </LightButton>
         </Grid>

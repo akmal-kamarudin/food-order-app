@@ -24,16 +24,40 @@ const CartAppBar = () => {
             <DarkButton
               variant="contained"
               size="small"
-              sx={{ borderRadius: 10 }}
+              sx={{
+                borderRadius: 10,
+                height: {
+                  xs: "2.4rem",
+                  md: "2.8rem",
+                  lg: "3rem",
+                },
+              }}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
               <Avatar sx={{ bgcolor: "transparent" }}>
-                <ShoppingCartIcon sx={{ color: isHover ? grey[900] : grey[100] }} />
+                <ShoppingCartIcon
+                  sx={{
+                    fontSize: {
+                      xs: "1.2rem",
+                      md: "1.4rem",
+                      lg: "1.6rem",
+                    },
+                    color: isHover ? grey[900] : grey[100],
+                  }}
+                />
               </Avatar>
               <Typography
                 variant="subtitle3"
-                sx={{ fontWeight: "bold", textTransform: "capitalize" }}
+                sx={{
+                  fontWeight: "bold",
+                  textTransform: "capitalize",
+                  fontSize: {
+                    xs: "0.7rem",
+                    md: "0.8rem",
+                    lg: "0.9rem",
+                  },
+                }}
               >
                 Your Cart
               </Typography>

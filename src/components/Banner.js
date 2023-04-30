@@ -1,27 +1,107 @@
-import React, { useState, useEffect } from "react";
-import { Grid, Button, Box } from "@mui/material";
+import React from "react";
+import { Grid, Box, Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import banner from "../images/banner-pic.jpg";
+import LightButton from "../styles/LightButton";
 
 const Banner = () => {
   return (
     <>
-      <Grid>
+      <Grid
+        container
+        sx={{
+          width: "100%",
+          position: "relative",
+        }}
+      >
         <Box
           component="img"
           sx={{
             backgroundSize: "cover",
             backgroundPosition: "center",
-            maxHeight: 1080,
-            maxWidth: 1920,
-            opacity: 0.7,
-            // position: "fixed",
-            // top: 0,
-            // left: 0,
-            // right: 0,
+            objectFit: "cover",
+            width: "100%",
+            height: "100%",
           }}
-          alt="App-logo"
+          alt="Banner"
           src={banner}
         />
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          <Typography
+            variant="h3"
+            color={grey[50]}
+            sx={{
+              fontWeight: "bold",
+              letterSpacing: "0.2em",
+              m: 1,
+              fontSize: {
+                xs: "1.5rem",
+                md: "2rem",
+                lg: "3rem",
+              },
+            }}
+          >
+            SHINE DINE
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color={grey[50]}
+            sx={{
+              fontWeight: "bold",
+              letterSpacing: "0.1em",
+              m: 1,
+              fontSize: {
+                xs: "0.8rem",
+                md: "1.2rem",
+                lg: "1.6rem",
+              },
+            }}
+          >
+            WHERE FOOD MEETS PEOPLE
+          </Typography>
+          <LightButton
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit"
+            sx={{
+              width: "15ch",
+              borderRadius: 8,
+              m: 4,
+              fontSize: {
+                xs: "0.6rem",
+                md: "0.8rem",
+                lg: "1rem",
+              },
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              sx={{
+                letterSpacing: "0.1em",
+                fontWeight: "bold",
+                fontSize: {
+                  xs: "0.6rem",
+                  md: "0.8rem",
+                  lg: "1rem",
+                },
+              }}
+            >
+              DISCOVER
+            </Typography>
+          </LightButton>
+        </Box>
       </Grid>
     </>
   );
