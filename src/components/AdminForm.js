@@ -1,9 +1,71 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import ItemsContext from "../context/ItemsContext";
 import DarkButton from "../styles/DarkButton";
 import { Grid, Typography, TextField, OutlinedInput } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 
-const AdminForm = () => {
+const AdminForm = (props) => {
+  const API_URL = "https://freeimage.host/api/1/upload";
+  const apiKey = process.env.REACT_APP_IMAGE_API_KEY;
+
+  const { itemsData, uploadImage } = useContext(ItemsContext);
+  const [foodData, setFoodData] = useState({
+    name: "",
+    description: "",
+    price: "",
+    imageFile: null,
+  });
+
+  const handleImageChange = (e) => {
+    setFoodData((inputs) => ({ ...inputs, imageFile: e.target.files[0] }));
+  };
+
+  const handleSubmit = async (e) => {
+    console.log("uploading...");
+    e.preventDefault();
+    console.log(foodData);
+    console.log(foodData.imageFile);
+    // const imageUrl = await uploadImage(foodData.imageFile);
+    // console.log(imageUrl);
+
+    try {
+      const formData = new FormData();
+      formData.append("source", foodData.imageFile);
+      const response = await axios.post(
+        `${API_URL}?key=${apiKey}&format=json`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      const data = await response.data.image.url;
+      console.log(data);
+
+      // &source=${foodData.imageFile}
+
+      // setFoodData((data) => ({
+      //   ...data,
+      //   imageLink: response.data.image.url,
+      // }));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setFoodData({
+      name: "",
+      description: "",
+      price: "",
+      imageFile: null,
+    });
+    props.hideAddItemForm();
+  };
+
   return (
     <>
       <Grid
@@ -18,9 +80,7 @@ const AdminForm = () => {
             Add Food Items
           </Typography>
         </Grid>
-        <form
-        //  onSubmit={loginButton}
-        >
+        <form onSubmit={handleSubmit}>
           <Grid
             container
             direction="column"
@@ -39,10 +99,8 @@ const AdminForm = () => {
               label="Name *"
               variant="outlined"
               type="text"
-              // value={inputs.userName}
-              // onChange={(e) =>
-              //   setInputs((inputs) => ({ ...inputs, userName: e.target.value }))
-              // }
+              value={foodData.name}
+              onChange={(e) => setFoodData((data) => ({ ...data, name: e.target.value }))}
               sx={{ mr: 2, mb: 2, width: "46ch" }}
             />
 
@@ -51,10 +109,10 @@ const AdminForm = () => {
               label="Description *"
               variant="outlined"
               type="text"
-              // value={inputs.password}
-              // onChange={(e) =>
-              //   setInputs((inputs) => ({ ...inputs, password: e.target.value }))
-              // }
+              value={foodData.description}
+              onChange={(e) =>
+                setFoodData((data) => ({ ...data, description: e.target.value }))
+              }
               sx={{ mr: 2, mb: 2, width: "46ch" }}
             />
 
@@ -62,11 +120,15 @@ const AdminForm = () => {
               id="outlined-basic"
               label="Price *"
               variant="outlined"
-              type="text"
-              // value={inputs.password}
-              // onChange={(e) =>
-              //   setInputs((inputs) => ({ ...inputs, password: e.target.value }))
-              // }
+              type="number"
+              step="0.01"
+              value={foodData.price}
+              onChange={(e) =>
+                setFoodData((data) => ({ ...data, price: e.target.value }))
+              }
+              inputProps={{
+                pattern: "^\\d+(\\.\\d{1,2})?$",
+              }}
               sx={{ mr: 2, mb: 2, width: "46ch" }}
             />
 
@@ -74,6 +136,7 @@ const AdminForm = () => {
               size="small"
               type="file"
               sx={{ mr: 2, mb: 2, width: "44.5ch" }}
+              onChange={handleImageChange}
             />
 
             <Grid
@@ -105,7 +168,7 @@ const AdminForm = () => {
                   ml: 0.5,
                   width: "25ch",
                 }}
-                // onClick={() => setErrorMessage(errorMessage)}
+                onClick={handleCancel}
               >
                 Cancel
               </DarkButton>

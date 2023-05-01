@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import ItemsContext from "./context/ItemsContext";
 import ItemsProvider from "./context/ItemsProvider";
 import Footer from "./components/Footer";
 import Admin from "./pages/Admin";
