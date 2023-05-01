@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DarkButton from "../styles/DarkButton";
-import { Button, Typography, Toolbar, Box, Avatar, Badge } from "@mui/material";
+import { Typography, Toolbar, Box, Avatar, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { grey } from "@mui/material/colors";
 

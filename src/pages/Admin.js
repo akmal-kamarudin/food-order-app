@@ -1,36 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { CartProvider } from "../context/CartProvider";
-// import { AppBar, Toolbar } from "@mui/material";
-import Banner from "../components/Banner";
-import AboutUs from "../components/AboutUs";
-import Meals from "../components/Meals";
-import AppBar from "../components/CartAppbar";
+import Sidebar from "../components/Sidebar";
+import Main from "../components/Main";
+import { Grid } from "@mui/material";
 
 const Admin = () => {
-  const [isValid, setIsValid] = useState(false);
-
   return (
     <>
-      <AppBar />
-      {/* <Banner /> */}
-      <section>
-        <h1>THIS IS ADMIN</h1>
-        <AboutUs />
-        <div style={{ marginTop: "15rem" }}>
-          <Meals />
-        </div>
-      </section>
+      <Grid container direction="row" sx={{ height: "100vh" }}>
+        <Grid item lg={2} xs={3}>
+          <Sidebar />
+        </Grid>
+        <Grid item lg={10} xs={9}>
+          <Main />
+        </Grid>
+      </Grid>
     </>
-    // <CartProvider>
-    //   <AppBar />
-    //   <Banner />
-    //   <section>
-    //     <AboutUs />
-    //     <div style={{ marginTop: "15rem" }}>
-    //       <Meals />
-    //     </div>
-    //   </section>
-    // </CartProvider>
   );
 };
 

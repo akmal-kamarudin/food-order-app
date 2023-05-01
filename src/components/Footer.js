@@ -36,14 +36,14 @@ const Footer = () => {
               //   lg: "100%",
               // },
               // width: {
-              //   xs: "30%",
-              //   md: "60%",
-              //   lg: "100%",
+              //   xs: "auto",
+              //   md: "auto",
+              //   lg: "auto",
               // },
-              height: "auto",
-              width: "auto",
-              maxHeight: 300,
-              maxWidth: 424,
+              // height: "auto",
+              // width: "auto",
+              maxHeight: 180,
+              maxWidth: 255,
               py: 2,
             }}
             alt="App-logo"
