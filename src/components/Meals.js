@@ -1,11 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
+import ItemsContext from "../context/ItemsContext";
+import MealsItem from "./MealsItem";
+import { Grid, Box, Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 const Meals = () => {
+  const { itemsData } = useContext(ItemsContext);
+
+  // Display Food Items
+  const renderFoodItem = itemsData.map((foodItem) => {
+    return (
+      <Grid item xs={"auto"} sm={"auto"} md={"auto"} key={foodItem.id}>
+        {<MealsItem food={foodItem} />}
+      </Grid>
+    );
+  });
+
   return (
-    <div>
-      {/* <Sidebar />
-      <Main /> */}
-    </div>
+    <>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ bgcolor: grey[400] }}
+      >
+        <Typography variant="h5" color={grey[900]} sx={{ fontWeight: "bold", mt: 2 }}>
+          Available Food
+        </Typography>
+        <Box sx={{ flexGrow: 1, m: 8 }}>
+          {renderFoodItem.length > 0 ? (
+            <>
+              <Grid
+                container
+                spacing={{ xs: 2, md: 3 }}
+                columns={{ xs: 1, sm: 2, md: 4 }}
+              >
+                {renderFoodItem}
+              </Grid>
+            </>
+          ) : (
+            <Typography variant="h6" sx={{ fontWeight: "bold", m: 4 }}>
+              Sorry, no Foods are available
+            </Typography>
+          )}
+        </Box>
+      </Grid>
+    </>
   );
 };
 

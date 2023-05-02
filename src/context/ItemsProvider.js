@@ -4,15 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 const ItemsProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [switchPage, setSwitchPage] = useState(null);
+  const [switchPage, setSwitchPage] = useState("/");
   const LOCAL_STORAGE_KEY = "foodItems";
   const [itemsData, setItemsData] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []
   );
 
   const addNewItem = (item) => {
-    console.log("adding item..");
-
     const newItem = {
       id: crypto.randomUUID(),
       ...item,
@@ -27,7 +25,11 @@ const ItemsProvider = ({ children }) => {
   }, [itemsData]);
 
   const removeItem = (id) => {
-    setItemsData((prevData) => prevData.filter((item) => item.id !== id));
+    const newFoodList = itemsData.filter((food) => {
+      return food.id !== id;
+    });
+
+    setItemsData(newFoodList);
   };
 
   const updateItem = (id, updatedItem) => {
@@ -40,14 +42,22 @@ const ItemsProvider = ({ children }) => {
     console.log("page:", page);
     console.log(switchPage);
 
-    if (page === "/admin" || page === null) {
-      setSwitchPage("/");
-      navigate("/admin");
-    } else if (page === "/") {
+    if (page === "/" || page === null) {
       setSwitchPage("/admin");
+      navigate("/admin");
+    } else if (page === "/admin" || page === null) {
+      setSwitchPage("/");
       navigate("/");
     }
   };
+
+  useEffect(() => {
+    if (switchPage === "/") {
+      navigate("/");
+    } else {
+      navigate("/admin");
+    }
+  }, [switchPage]);
 
   const contextValue = {
     itemsData,

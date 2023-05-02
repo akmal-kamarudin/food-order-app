@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ItemsContext from "../context/ItemsContext";
 import "../App.css";
 import LightButton from "../styles/LightButton";
@@ -54,30 +54,13 @@ const Footer = () => {
           <LightButton
             variant="contained"
             color="primary"
-            size="medium"
+            size="small"
             type="submit"
-            sx={{
-              width: "15ch",
-              fontSize: {
-                xs: "0.6rem",
-                md: "0.8rem",
-                lg: "1rem",
-              },
-            }}
+            sx={{ width: { xs: "10ch", lg: "14ch" } }}
             onClick={switchPageHandler}
           >
-            <Typography
-              variant="subtitle2"
-              sx={{
-                fontWeight: "bold",
-                fontSize: {
-                  xs: "0.6rem",
-                  md: "0.8rem",
-                  lg: "1rem",
-                },
-              }}
-            >
-              {switchPage === "/" ? "User" : "Admin"}
+            <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+              {switchPage === "/" ? "Admin" : "User"}
             </Typography>
           </LightButton>
         </Grid>

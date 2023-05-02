@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AdminForm from "./AdminForm";
+import Meals from "./Meals";
 import DarkButton from "../styles/DarkButton";
-import { Grid, Typography, Box } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 const Main = () => {
@@ -16,7 +17,7 @@ const Main = () => {
         direction="column"
         justifyContent="flex-start"
         alignItems="center"
-        sx={{ height: "100vh", bgcolor: grey[200] }}
+        sx={{ bgcolor: grey[200] }}
       >
         <Grid>
           <Box sx={{ flex: 4 }}>
@@ -25,15 +26,15 @@ const Main = () => {
             ) : (
               <DarkButton
                 variant="contained"
-                size="small"
+                size="medium"
                 sx={{
                   borderRadius: 2,
                   m: 3,
-                  height: {
-                    xs: "2rem",
-                    md: "2.4rem",
-                    lg: "2.8rem",
-                  },
+                  // height: {
+                  //   xs: "2rem",
+                  //   md: "2.4rem",
+                  //   lg: "2.8rem",
+                  // },
                 }}
                 onClick={showAddItemForm}
               >
@@ -41,6 +42,9 @@ const Main = () => {
               </DarkButton>
             )}
           </Box>
+        </Grid>
+        <Grid>
+          <Meals sx={{ overflowY: "scroll" }} />
         </Grid>
       </Grid>
     </>

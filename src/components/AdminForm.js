@@ -65,7 +65,7 @@ const AdminForm = (props) => {
       });
       props.hideAddItemForm();
     }
-  }, [foodData]);
+  }, [foodData, addNewItem, props]);
 
   const handleCancel = (e) => {
     e.preventDefault();
@@ -84,9 +84,9 @@ const AdminForm = (props) => {
       <Grid
         container
         direction="column"
-        justifyContent="flex-start"
+        justifyContent="center"
         alignItems="center"
-        sx={{ minHeight: "70vh" }}
+        // sx={{ minHeight: "70vh" }}
       >
         <Grid>
           <Typography variant="h5" color={grey[900]} sx={{ fontWeight: "bold", mt: 2 }}>
@@ -105,6 +105,7 @@ const AdminForm = (props) => {
               height: "42ch",
               borderRadius: "6px",
               bgcolor: blueGrey[100],
+              boxShadow: 2,
             }}
           >
             <TextField
