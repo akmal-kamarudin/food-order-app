@@ -7,14 +7,16 @@ import { blueGrey, grey } from "@mui/material/colors";
 
 const AdminForm = (props) => {
   const API_URL = "https://freeimage.host/api/1/upload";
+  const PROXY_URL = "https://cors-anywhere.herokuapp.com";
   const apiKey = process.env.REACT_APP_IMAGE_API_KEY;
 
-  const { itemsData, uploadImage } = useContext(ItemsContext);
+  const { addNewItem } = useContext(ItemsContext);
   const [foodData, setFoodData] = useState({
     name: "",
     description: "",
     price: "",
     imageFile: null,
+    imageLink: null,
   });
 
   const handleImageChange = (e) => {
@@ -33,7 +35,7 @@ const AdminForm = (props) => {
       const formData = new FormData();
       formData.append("source", foodData.imageFile);
       const response = await axios.post(
-        `${API_URL}?key=${apiKey}&format=json`,
+        `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
         formData,
         {
           headers: {
@@ -41,19 +43,34 @@ const AdminForm = (props) => {
           },
         }
       );
-      const data = await response.data.image.url;
+      const data = await response.data;
       console.log(data);
+      const imageUrl = await response.data.image.url;
+      console.log(imageUrl);
 
-      // &source=${foodData.imageFile}
-
-      // setFoodData((data) => ({
-      //   ...data,
-      //   imageLink: response.data.image.url,
-      // }));
+      setFoodData((food) => ({
+        ...food,
+        imageLink: imageUrl,
+      }));
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (foodData.imageLink != null) {
+      const { imageFile, ...food } = foodData;
+      addNewItem(food);
+      setFoodData({
+        name: "",
+        description: "",
+        price: "",
+        imageFile: null,
+        imageLink: null,
+      });
+      props.hideAddItemForm();
+    }
+  }, [foodData]);
 
   const handleCancel = (e) => {
     e.preventDefault();
@@ -62,6 +79,7 @@ const AdminForm = (props) => {
       description: "",
       price: "",
       imageFile: null,
+      imageLink: null,
     });
     props.hideAddItemForm();
   };
