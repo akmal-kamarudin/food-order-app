@@ -19,15 +19,10 @@ const AdminForm = (props) => {
     imageLink: null,
   });
 
-  const handleImageChange = (e) => {
-    setFoodData((inputs) => ({ ...inputs, imageFile: e.target.files[0] }));
-  };
-
   const handleSubmit = async (e) => {
-    console.log("uploading...");
     e.preventDefault();
+    console.log("uploading...");
     console.log(foodData);
-    console.log(foodData.imageFile);
     // const imageUrl = await uploadImage(foodData.imageFile);
     // console.log(imageUrl);
 
@@ -154,7 +149,9 @@ const AdminForm = (props) => {
               size="small"
               type="file"
               sx={{ mr: 2, mb: 2, width: "44.5ch" }}
-              onChange={handleImageChange}
+              onChange={(e) =>
+                setFoodData((data) => ({ ...data, imageFile: e.target.files[0] }))
+              }
             />
 
             <Grid

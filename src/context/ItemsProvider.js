@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ItemsContext from "./ItemsContext";
 import { useNavigate } from "react-router-dom";
 
 const ItemsProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [itemsData, setItemsData] = useState([]);
   const [switchPage, setSwitchPage] = useState(null);
+  const LOCAL_STORAGE_KEY = "foodItems";
+  const [itemsData, setItemsData] = useState(
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []
+  );
 
   const addNewItem = (item) => {
     console.log("adding item..");
-    console.log(item);
 
-    setItemsData((prevData) => [...prevData, item]);
+    const newItem = {
+      id: crypto.randomUUID(),
+      ...item,
+    };
+    console.log(newItem);
+
+    setItemsData((prevItem) => [...prevItem, newItem]);
   };
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(itemsData));
+  }, [itemsData]);
 
   const removeItem = (id) => {
     setItemsData((prevData) => prevData.filter((item) => item.id !== id));
