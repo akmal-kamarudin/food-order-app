@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CartProvider } from "../context/CartProvider";
-// import { AppBar, Toolbar } from "@mui/material";
+import CartProvider from "../context/CartProvider";
 import Banner from "../components/Banner";
 import AboutUs from "../components/AboutUs";
 import Meals from "../components/Meals";
@@ -11,14 +10,16 @@ const Users = () => {
 
   return (
     <>
-      <CartAppBar />
-      <Banner />
-      <section>
-        <AboutUs />
-        <div style={{ marginTop: "15rem" }}>
-          <Meals />
-        </div>
-      </section>
+      <CartProvider>
+        <CartAppBar />
+        <Banner />
+        <section>
+          <AboutUs />
+          <div style={{ marginTop: "15rem" }}>
+            <Meals />
+          </div>
+        </section>
+      </CartProvider>
     </>
     // <CartProvider>
     //   <AppBar />

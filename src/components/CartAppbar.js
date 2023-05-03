@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import CartContext from "../context/CartContext";
 import CartModal from "./CartModal";
 import DarkButton from "../styles/DarkButton";
 import { Typography, Toolbar, Box, Avatar, Badge } from "@mui/material";
@@ -6,7 +7,9 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { grey } from "@mui/material/colors";
 
 const CartAppBar = () => {
-  const cartItemsCount = 5; // Replace with the actual number of items in the cart
+  const { items } = useContext(CartContext);
+
+  const cartItemsCount = items.length; // Replace with the actual number of items in the cart
 
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(true);

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import ItemsContext from "../context/ItemsContext";
+import CartContext from "../context/CartContext";
 import DarkButton from "../styles/DarkButton";
 import { grey } from "@mui/material/colors";
 import {
@@ -14,13 +15,17 @@ import {
 
 const MealsItem = (props) => {
   const { removeItem, switchPage } = useContext(ItemsContext);
+  const { addItem } = useContext(CartContext);
   const { food } = props;
-  // const { id } = food.id;
 
   // Delete Food
   const deleteHandler = (id) => {
     console.log(id);
     removeItem(id);
+  };
+
+  const addHandler = (food) => {
+    addItem(food);
   };
 
   return (
@@ -78,7 +83,7 @@ const MealsItem = (props) => {
                 ml: 1,
                 mt: 1,
               }}
-              // onClick={() => deleteHandler(food.id)}
+              onClick={() => addHandler(food)}
             >
               Add To Cart
             </DarkButton>
