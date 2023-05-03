@@ -4,14 +4,14 @@ import { CartProvider } from "../context/CartProvider";
 import Banner from "../components/Banner";
 import AboutUs from "../components/AboutUs";
 import Meals from "../components/Meals";
-import AppBar from "../components/CartAppbar";
+import CartAppBar from "../components/CartAppBar";
 
 const Users = () => {
   const [isValid, setIsValid] = useState(false);
 
   return (
     <>
-      <AppBar />
+      <CartAppBar />
       <Banner />
       <section>
         <AboutUs />

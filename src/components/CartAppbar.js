@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CartModal from "./CartModal";
 import DarkButton from "../styles/DarkButton";
 import { Typography, Toolbar, Box, Avatar, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -6,20 +7,26 @@ import { grey } from "@mui/material/colors";
 
 const CartAppBar = () => {
   const cartItemsCount = 5; // Replace with the actual number of items in the cart
+
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpen = () => setIsOpen(true);
+  const handleClose = () => setIsOpen(false);
+
   const [isHover, setIsHover] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHover(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHover(false);
-  };
+  const handleMouseEnter = () => setIsHover(true);
+  const handleMouseLeave = () => setIsHover(false);
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <Box sx={{ position: "fixed", top: 10, right: 0, zIndex: 1 }}>
+      <Box container sx={{ flexGrow: 1 }}>
+        <Box
+          sx={{
+            position: "fixed",
+            top: "1%",
+            right: "1%",
+            zIndex: 1,
+          }}
+        >
           <Toolbar>
             <DarkButton
               variant="contained"
@@ -34,6 +41,7 @@ const CartAppBar = () => {
               }}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
+              onClick={handleOpen}
             >
               <Avatar sx={{ bgcolor: "transparent" }}>
                 <ShoppingCartIcon
@@ -70,6 +78,7 @@ const CartAppBar = () => {
           </Toolbar>
         </Box>
       </Box>
+      <CartModal isOpen={isOpen} onClose={handleClose} />
     </>
   );
 };

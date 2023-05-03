@@ -11,18 +11,13 @@ function App() {
     <Router>
       <ItemsProvider>
         <Grid container direction="column">
-          <Grid
-            item
-            lg={10}
-            xs={10}
-            sx={{ flexGrow: 1, position: "relative", margin: 0 }}
-          >
+          <Grid item xs={10} sx={{ margin: 0 }}>
             <Routes>
               <Route path="/" exact element={<Users />} />
               <Route path="/admin" element={<Admin />} />
             </Routes>
           </Grid>
-          <Grid item lg={2} xs={2} sx={{ position: "relative", bottom: 0 }}>
+          <Grid item xs={2} sx={{ position: "relative", bottom: 0 }}>
             <Footer />
           </Grid>
         </Grid>

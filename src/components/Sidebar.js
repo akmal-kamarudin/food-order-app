@@ -10,7 +10,7 @@ const Sidebar = () => {
         direction="column"
         justifyContent="flex-start"
         alignItems="flex-start"
-        sx={{ height: "100vh", bgcolor: grey[50] }}
+        sx={{ height: "70vh", bgcolor: grey[50] }}
       >
         <Grid>
           <Typography
@@ -19,7 +19,7 @@ const Sidebar = () => {
               p: 2,
               fontWeight: "bold",
               fontSize: {
-                xs: "1rem",
+                xs: "1.1rem",
                 md: "1.2rem",
                 lg: "1.3rem",
               },

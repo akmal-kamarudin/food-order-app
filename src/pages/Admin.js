@@ -7,7 +7,7 @@ import { Grid } from "@mui/material";
 const Admin = () => {
   return (
     <>
-      <Grid container direction="row" sx={{ height: "100vh" }}>
+      <Grid container direction="row" sx={{ height: "80vh" }}>
         <Grid item lg={2} xs={3}>
           <Sidebar />
         </Grid>
