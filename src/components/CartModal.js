@@ -7,7 +7,7 @@ import { grey } from "@mui/material/colors";
 
 const CartModal = (props) => {
   const { isOpen, onClose } = props;
-  const { items, addItem, removeItem } = useContext(CartContext);
+  const { items, addItem, removeItem, totalAmount } = useContext(CartContext);
 
   // Display Cart Items
   const renderCartItem = items.map((cartItem) => {
@@ -120,7 +120,7 @@ const CartModal = (props) => {
               Total Amount
             </Typography>
             <Typography variant="subtitle1" color={grey[800]} sx={{ fontWeight: "bold" }}>
-              {`$$$$`}
+              {`$${totalAmount}`}
             </Typography>
           </Grid>
           <LightButton

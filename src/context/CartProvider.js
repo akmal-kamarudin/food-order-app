@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CartContext from "./CartContext";
 
 const CartProvider = ({ children }) => {
   const [items, setItems] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   const addItem = (food) => {
     const existingItemIndex = items.findIndex((item) => item.id === food.id);
@@ -29,7 +30,6 @@ const CartProvider = ({ children }) => {
   const removeItem = (id) => {
     const existingItemIndex = items.findIndex((item) => item.id === id);
     const existingItem = items.find((item) => item.id === id);
-    console.log(id);
 
     if (existingItemIndex >= 0 && existingItem.multiplier > 1) {
       const updatedCart = [...items];
@@ -47,17 +47,25 @@ const CartProvider = ({ children }) => {
     }
   };
 
-  // useEffect(() => {
-  //   if (switchPage === "/") {
-  //     navigate("/");
-  //   } else {
-  //     navigate("/admin");
-  //   }
-  // }, [switchPage]);
+  useEffect(() => {
+    let calculatedTotal = 0;
+
+    for (let i = 0; i < items.length; i++) {
+      const food = items[i];
+      const itemPrice = parseFloat(food.price);
+      const itemMultiplier = food.multiplier;
+      const itemTotalPrice = itemPrice * itemMultiplier;
+      calculatedTotal += itemTotalPrice;
+    }
+
+    const roundedTotal = calculatedTotal.toFixed(2);
+    console.log(roundedTotal);
+    setTotalAmount(roundedTotal);
+  }, [items]);
 
   const contextValue = {
     items,
-    // totalAmount,
+    totalAmount,
     addItem,
     removeItem,
   };
