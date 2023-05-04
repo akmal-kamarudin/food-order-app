@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import ItemsContext from "../context/ItemsContext";
 import CartContext from "../context/CartContext";
 import DarkButton from "../assets/DarkButton";
 import { Typography, Toolbar, Box, Avatar, Badge } from "@mui/material";
@@ -6,6 +7,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { grey } from "@mui/material/colors";
 
 const CartAppBar = (props) => {
+  const { switchPage } = useContext(ItemsContext);
   const { items } = useContext(CartContext);
 
   const cartItemsCount = items.length; // Replace with the actual number of items in the cart
@@ -40,7 +42,7 @@ const CartAppBar = (props) => {
               }}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
-              onClick={modalHandler}
+              onClick={switchPage === "/" ? modalHandler : modalHandler}
             >
               <Avatar sx={{ bgcolor: "transparent" }}>
                 <ShoppingCartIcon
@@ -66,7 +68,7 @@ const CartAppBar = (props) => {
                   },
                 }}
               >
-                Your Cart
+                {switchPage === "/" ? "Your Cart" : " Order List"}
               </Typography>
               <Badge
                 badgeContent={cartItemsCount}
