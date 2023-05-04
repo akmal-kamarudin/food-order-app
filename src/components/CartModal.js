@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import CartContext from "../context/CartContext";
 import LightButton from "../styles/LightButton";
 import DarkButton from "../styles/DarkButton";
@@ -6,7 +6,7 @@ import { Box, Grid, Modal, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 const CartModal = (props) => {
-  const { isOpen, onClose } = props;
+  const { isValid, hideModalHandler } = props;
   const { items, addItem, removeItem, totalAmount } = useContext(CartContext);
 
   // Display Cart Items
@@ -101,7 +101,7 @@ const CartModal = (props) => {
 
   return (
     <div>
-      <Modal keepMounted open={isOpen} onClose={onClose}>
+      <Modal keepMounted open={isValid} onClose={hideModalHandler}>
         <Box sx={cartStyle}>
           <Typography variant="h6" color={grey[800]} sx={{ fontWeight: "bold", mb: 2 }}>
             My Cart
@@ -135,7 +135,7 @@ const CartModal = (props) => {
               mt: 2,
               mr: 1,
             }}
-            onClick={onClose}
+            onClick={hideModalHandler}
           >
             Close
           </LightButton>
