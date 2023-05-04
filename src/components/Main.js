@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AdminForm from "./AdminForm";
 import Meals from "./Meals";
-import DarkButton from "../styles/DarkButton";
+import DarkButton from "../assets/DarkButton";
 import { Grid, Box } from "@mui/material";
 import { grey } from "@mui/material/colors";
 

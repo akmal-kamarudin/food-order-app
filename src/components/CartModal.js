@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import CartContext from "../context/CartContext";
-import LightButton from "../styles/LightButton";
-import DarkButton from "../styles/DarkButton";
+import LightButton from "../assets/LightButton";
+import DarkButton from "../assets/DarkButton";
 import { Box, Grid, Modal, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 

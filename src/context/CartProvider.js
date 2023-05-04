@@ -2,8 +2,17 @@ import React, { useState, useEffect } from "react";
 import CartContext from "./CartContext";
 
 const CartProvider = ({ children }) => {
-  const [items, setItems] = useState([]);
-  const [totalAmount, setTotalAmount] = useState(0);
+  const LOCAL_STORAGE_KEY2 = "Cart-Items";
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY2)) ?? []
+  );
+  // const [items, setItems] = useState([]);
+
+  const LOCAL_STORAGE_KEY3 = "Total-Amount";
+  const [totalAmount, setTotalAmount] = useState(
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY3)) ?? 0
+  );
+  // const [totalAmount, setTotalAmount] = useState(0);
 
   const addItem = (food) => {
     const existingItemIndex = items.findIndex((item) => item.id === food.id);
@@ -62,6 +71,11 @@ const CartProvider = ({ children }) => {
     console.log(roundedTotal);
     setTotalAmount(roundedTotal);
   }, [items]);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY2, JSON.stringify(items));
+    localStorage.setItem(LOCAL_STORAGE_KEY3, JSON.stringify(totalAmount));
+  }, [items, totalAmount]);
 
   const contextValue = {
     items,

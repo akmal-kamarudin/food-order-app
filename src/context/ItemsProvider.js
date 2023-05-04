@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 const ItemsProvider = ({ children }) => {
   const API_URL = "https://freeimage.host/api/1/upload";
-  const PROXY_URL = "https://cors-anywhere.herokuapp.com";
+  // const PROXY_URL = "https://cors-anywhere.herokuapp.com";
   const apiKey = process.env.REACT_APP_IMAGE_API_KEY;
 
   const navigate = useNavigate();
   const [switchPage, setSwitchPage] = useState("/");
-  const LOCAL_STORAGE_KEY = "foodItems";
+  const LOCAL_STORAGE_KEY = "Food-Items";
   const [itemsData, setItemsData] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []
   );
@@ -20,7 +20,8 @@ const ItemsProvider = ({ children }) => {
       const formData = new FormData();
       formData.append("source", foodImage);
       const response = await axios.post(
-        `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
+        // `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
+        `${API_URL}?key=${apiKey}&format=json&action=upload`,
         formData,
         {
           headers: {
@@ -58,11 +59,11 @@ const ItemsProvider = ({ children }) => {
     setItemsData(newFoodList);
   };
 
-  const updateItem = (id, updatedItem) => {
-    setItemsData((prevData) =>
-      prevData.map((item) => (item.id === id ? updatedItem : item))
-    );
-  };
+  // const updateItem = (id, updatedItem) => {
+  //   setItemsData((prevData) =>
+  //     prevData.map((item) => (item.id === id ? updatedItem : item))
+  //   );
+  // };
 
   const togglePage = (page) => {
     console.log("page:", page);
@@ -91,7 +92,7 @@ const ItemsProvider = ({ children }) => {
     uploadImage,
     addNewItem,
     removeItem,
-    updateItem,
+    // updateItem,
     togglePage,
   };
 

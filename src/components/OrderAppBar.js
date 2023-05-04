@@ -5,7 +5,7 @@ import { Typography, Toolbar, Box, Avatar, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { grey } from "@mui/material/colors";
 
-const CartAppBar = (props) => {
+const OrderAppBar = (props) => {
   const { items } = useContext(CartContext);
 
   const cartItemsCount = items.length; // Replace with the actual number of items in the cart
@@ -81,4 +81,4 @@ const CartAppBar = (props) => {
   );
 };
 
-export default CartAppBar;
+export default OrderAppBar;

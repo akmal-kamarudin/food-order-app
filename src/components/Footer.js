@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import ItemsContext from "../context/ItemsContext";
 import "../App.css";
-import LightButton from "../styles/LightButton";
+import LightButton from "../assets/LightButton";
 import { Grid, Box, Typography } from "@mui/material";
 import logo from "../images/logo.png";
 

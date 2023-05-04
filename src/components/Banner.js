@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Box, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import banner from "../images/banner-pic.jpg";
-import LightButton from "../styles/LightButton";
+import LightButton from "../assets/LightButton";
 
 const Banner = () => {
   return (
