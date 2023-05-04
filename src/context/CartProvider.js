@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import CartContext from "./CartContext";
 
 const CartProvider = ({ children }) => {
-  // const LOCAL_STORAGE_KEY = "foodItems";
   const [items, setItems] = useState([]);
 
   const addItem = (food) => {

@@ -11,6 +11,9 @@ const AdminForm = (props) => {
   const apiKey = process.env.REACT_APP_IMAGE_API_KEY;
 
   const { addNewItem } = useContext(ItemsContext);
+  const [nameError, setNameError] = useState(false);
+  const [descError, setDescError] = useState(false);
+  const [priceError, setPriceError] = useState(false);
   const [foodData, setFoodData] = useState({
     name: "",
     description: "",
@@ -81,13 +84,7 @@ const AdminForm = (props) => {
 
   return (
     <>
-      <Grid
-        container
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        // sx={{ minHeight: "70vh" }}
-      >
+      <Grid container direction="column" justifyContent="center" alignItems="center">
         <Grid>
           <Typography variant="h5" color={grey[900]} sx={{ fontWeight: "bold", mt: 2 }}>
             Add Food Items
@@ -101,48 +98,73 @@ const AdminForm = (props) => {
             alignItems="center"
             sx={{
               m: 2,
+              py: 2,
               width: "50ch",
-              height: "42ch",
               borderRadius: "6px",
               bgcolor: blueGrey[100],
               boxShadow: 2,
             }}
           >
             <TextField
-              id="outlined-basic"
               label="Name *"
               variant="outlined"
               type="text"
               value={foodData.name}
-              onChange={(e) => setFoodData((data) => ({ ...data, name: e.target.value }))}
+              inputProps={{ pattern: ".{0,16}" }}
+              onChange={(e) => {
+                const name = e.target.value;
+                if (name.length > 16) {
+                  setNameError(true);
+                  setFoodData((data) => ({ ...data, name }));
+                } else {
+                  setNameError(false);
+                  setFoodData((data) => ({ ...data, name }));
+                }
+              }}
+              error={nameError}
+              helperText={nameError ? "Name must be 16 characters or less" : ""}
               sx={{ mr: 2, mb: 2, width: "46ch" }}
             />
 
             <TextField
-              id="outlined-basic"
               label="Description *"
               variant="outlined"
               type="text"
               value={foodData.description}
-              onChange={(e) =>
-                setFoodData((data) => ({ ...data, description: e.target.value }))
-              }
+              inputProps={{ pattern: ".{0,24}" }}
+              onChange={(e) => {
+                const description = e.target.value;
+                if (description.length > 24) {
+                  setDescError(true);
+                  setFoodData((data) => ({ ...data, description }));
+                } else {
+                  setDescError(false);
+                  setFoodData((data) => ({ ...data, description }));
+                }
+              }}
+              error={descError}
+              helperText={descError ? "Description must be 24 characters or less" : ""}
               sx={{ mr: 2, mb: 2, width: "46ch" }}
             />
 
             <TextField
-              id="outlined-basic"
               label="Price *"
               variant="outlined"
-              type="number"
-              step="0.01"
+              type="text"
               value={foodData.price}
-              onChange={(e) =>
-                setFoodData((data) => ({ ...data, price: e.target.value }))
-              }
-              inputProps={{
-                pattern: "^\\d+(\\.\\d{1,2})?$",
+              inputProps={{ pattern: "^[0-9]+(.[0-9]{1,2})?$" }}
+              onChange={(e) => {
+                const price = e.target.value;
+                if (price === "" || /^[0-9]+(.[0-9]{1,2})?$/.test(price)) {
+                  setPriceError(false);
+                  setFoodData((data) => ({ ...data, price }));
+                } else {
+                  setPriceError(true);
+                  setFoodData((data) => ({ ...data, price }));
+                }
               }}
+              error={priceError}
+              helperText={priceError ? "Price must be a number with 2 d.p." : ""}
               sx={{ mr: 2, mb: 2, width: "46ch" }}
             />
 
@@ -172,7 +194,6 @@ const AdminForm = (props) => {
                   mr: 0.5,
                   width: "25ch",
                 }}
-                // onClick={() => setErrorMessage(errorMessage)}
               >
                 Add
               </DarkButton>
