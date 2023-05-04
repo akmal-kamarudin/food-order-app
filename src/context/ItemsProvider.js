@@ -1,14 +1,40 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import ItemsContext from "./ItemsContext";
 import { useNavigate } from "react-router-dom";
 
 const ItemsProvider = ({ children }) => {
+  const API_URL = "https://freeimage.host/api/1/upload";
+  const PROXY_URL = "https://cors-anywhere.herokuapp.com";
+  const apiKey = process.env.REACT_APP_IMAGE_API_KEY;
+
   const navigate = useNavigate();
   const [switchPage, setSwitchPage] = useState("/");
   const LOCAL_STORAGE_KEY = "foodItems";
   const [itemsData, setItemsData] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []
   );
+
+  const uploadImage = async (foodImage) => {
+    try {
+      const formData = new FormData();
+      formData.append("source", foodImage);
+      const response = await axios.post(
+        `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      // const data = await response.data;
+      // console.log(data);
+      return await response.data.image.url;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const addNewItem = (item) => {
     const newItem = {
@@ -62,6 +88,7 @@ const ItemsProvider = ({ children }) => {
   const contextValue = {
     itemsData,
     switchPage,
+    uploadImage,
     addNewItem,
     removeItem,
     updateItem,

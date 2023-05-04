@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import ItemsContext from "../context/ItemsContext";
+import { useSnackbar } from "notistack";
 import DarkButton from "../styles/DarkButton";
 import { Grid, Typography, TextField, OutlinedInput } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 
 const AdminForm = (props) => {
-  const API_URL = "https://freeimage.host/api/1/upload";
-  const PROXY_URL = "https://cors-anywhere.herokuapp.com";
-  const apiKey = process.env.REACT_APP_IMAGE_API_KEY;
-
-  const { addNewItem } = useContext(ItemsContext);
+  const inputRef = useRef(null);
+  const { uploadImage, addNewItem } = useContext(ItemsContext);
+  const { enqueueSnackbar } = useSnackbar();
+  const [errorMessage, setErrorMessage] = useState("");
   const [nameError, setNameError] = useState(false);
   const [descError, setDescError] = useState(false);
   const [priceError, setPriceError] = useState(false);
+
   const [foodData, setFoodData] = useState({
     name: "",
     description: "",
@@ -24,39 +24,44 @@ const AdminForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("uploading...");
-    console.log(foodData);
-    // const imageUrl = await uploadImage(foodData.imageFile);
-    // console.log(imageUrl);
 
-    try {
-      const formData = new FormData();
-      formData.append("source", foodData.imageFile);
-      const response = await axios.post(
-        `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      const data = await response.data;
-      console.log(data);
-      const imageUrl = await response.data.image.url;
+    if (
+      foodData.imageFile === null ||
+      foodData.name === "" ||
+      foodData.description === "" ||
+      foodData.price === ""
+    ) {
+      setFoodData({
+        name: "",
+        description: "",
+        price: "",
+        imageFile: null,
+        imageLink: null,
+      });
+
+      inputRef.current.value = "";
+      setErrorMessage("warning");
+
+      return;
+    } else {
+      console.log("uploading...");
+
+      const imageUrl = await uploadImage(foodData.imageFile);
       console.log(imageUrl);
 
       setFoodData((food) => ({
         ...food,
         imageLink: imageUrl,
       }));
-    } catch (error) {
-      console.error(error);
+      setErrorMessage("success");
     }
+
+    console.log(foodData);
   };
 
   useEffect(() => {
-    if (foodData.imageLink != null) {
+    if (foodData.imageLink !== null) {
+      console.log(foodData);
       const { imageFile, ...food } = foodData;
       addNewItem(food);
       setFoodData({
@@ -70,6 +75,35 @@ const AdminForm = (props) => {
     }
   }, [foodData, addNewItem, props]);
 
+  // Error alert
+  useEffect(() => {
+    const variant = errorMessage;
+    const position = { vertical: "top", horizontal: "center" };
+
+    if (errorMessage === "error") {
+      enqueueSnackbar("Error! Please select a valid image file (PNG or JPEG).", {
+        variant,
+        anchorOrigin: position,
+        autoHideDuration: 1500,
+      });
+    } else if (errorMessage === "warning") {
+      enqueueSnackbar("Warning! All the fields are mandatory.", {
+        variant,
+        anchorOrigin: position,
+        autoHideDuration: 1500,
+      });
+    } else if (errorMessage === "success") {
+      enqueueSnackbar("Success! Food item is uploaded.", {
+        variant,
+        anchorOrigin: position,
+        autoHideDuration: 2000,
+      });
+    }
+
+    setErrorMessage("");
+  }, [errorMessage, enqueueSnackbar]);
+
+  // Cancel button
   const handleCancel = (e) => {
     e.preventDefault();
     setFoodData({
@@ -164,7 +198,7 @@ const AdminForm = (props) => {
                 }
               }}
               error={priceError}
-              helperText={priceError ? "Price must be a number with 2 d.p." : ""}
+              helperText={priceError ? "Price must be a numeric value with 2 d.p." : ""}
               sx={{ mr: 2, mb: 2, width: "46ch" }}
             />
 
@@ -172,9 +206,17 @@ const AdminForm = (props) => {
               size="small"
               type="file"
               sx={{ mr: 2, mb: 2, width: "44.5ch" }}
-              onChange={(e) =>
-                setFoodData((data) => ({ ...data, imageFile: e.target.files[0] }))
-              }
+              inputRef={inputRef}
+              accept="image/png,image/jpeg"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (!file || !file.type.startsWith("image/")) {
+                  setErrorMessage("error");
+                  inputRef.current.value = "";
+                  return;
+                }
+                setFoodData((data) => ({ ...data, imageFile: file }));
+              }}
             />
 
             <Grid
