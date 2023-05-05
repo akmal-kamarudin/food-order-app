@@ -7,7 +7,7 @@ import { grey } from "@mui/material/colors";
 
 const OrderModal = (props) => {
   const { isValid, hideModalHandler } = props;
-  const { items, addItem, removeItem, totalAmount } = useContext(CartContext);
+  const { items, totalAmount } = useContext(CartContext);
 
   // Display Cart Items
   const renderCartItem = items.map((cartItem) => {
@@ -20,10 +20,7 @@ const OrderModal = (props) => {
           alignItems="center"
           sx={{ my: 1 }}
         >
-          <Grid>
-            <Typography variant="subtitle1" color={grey[800]} sx={{ fontWeight: "bold" }}>
-              {cartItem.name}
-            </Typography>
+          <Grid sx={{ minWidth: "160px" }}>
             <Grid
               container
               direction="row"
@@ -35,51 +32,57 @@ const OrderModal = (props) => {
                 color={grey[800]}
                 sx={{ fontWeight: "bold", pr: 1 }}
               >
-                {`$${cartItem.price}`}
+                {cartItem.name}
               </Typography>
-              <Box
-                sx={{
-                  px: 0.5,
-                  border: "1px solid black",
-                  borderRadius: "5px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                {`x${cartItem.multiplier}`}
-              </Box>
             </Grid>
           </Grid>
 
-          <Grid>
-            <LightButton
-              variant="contained"
-              size="small"
-              type="submit"
+          <Grid sx={{ minWidth: "40px" }}>
+            <Box
               sx={{
-                borderRadius: "8px",
-                boxShadow: 4,
-                mt: 2,
-                mr: 1,
+                border: "1px solid black",
+                borderRadius: "5px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
-              onClick={() => addItem(cartItem)}
             >
-              +
-            </LightButton>
-            <LightButton
-              variant="contained"
-              size="small"
-              type="submit"
-              sx={{
-                borderRadius: "8px",
-                boxShadow: 4,
-                mt: 2,
-              }}
-              onClick={() => removeItem(cartItem.id)}
+              {`x${cartItem.multiplier}`}
+            </Box>
+          </Grid>
+
+          <Grid sx={{ minWidth: "80px" }}>
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-end"
+              alignItems="baseline"
             >
-              -
-            </LightButton>
+              <Typography
+                variant="subtitle1"
+                color={grey[800]}
+                sx={{ fontWeight: "bold" }}
+              >
+                {`$${cartItem.price}`}
+              </Typography>
+            </Grid>
+          </Grid>
+
+          <Grid sx={{ minWidth: "80px" }}>
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-end"
+              alignItems="baseline"
+            >
+              <Typography
+                variant="subtitle1"
+                color={grey[800]}
+                sx={{ fontWeight: "bold" }}
+              >
+                {`$${cartItem.total}`}
+              </Typography>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -91,7 +94,7 @@ const OrderModal = (props) => {
     top: "50%",
     right: "50%",
     transform: "translate(50%, -50%)",
-    width: { xs: 380, sm: 500, lg: 600 },
+    width: { xs: 400, sm: 400, lg: 400 },
     bgcolor: "background.paper",
     borderRadius: "10px",
     border: "2px solid black",
@@ -104,8 +107,71 @@ const OrderModal = (props) => {
       <Modal keepMounted open={isValid} onClose={hideModalHandler}>
         <Box sx={cartStyle}>
           <Typography variant="h6" color={grey[800]} sx={{ fontWeight: "bold", mb: 2 }}>
-            My Cart
+            Order List
           </Typography>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ my: 1 }}
+          >
+            <Grid sx={{ minWidth: "150px" }}>
+              <Grid>
+                <Typography
+                  variant="subtitle1"
+                  color={grey[800]}
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Menu
+                </Typography>
+              </Grid>
+            </Grid>
+
+            <Grid>
+              <Typography
+                variant="subtitle1"
+                color={grey[800]}
+                sx={{ fontWeight: "bold" }}
+              >
+                Quantity
+              </Typography>
+            </Grid>
+
+            <Grid sx={{ minWidth: "80px" }}>
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="baseline"
+              >
+                <Typography
+                  variant="subtitle1"
+                  color={grey[800]}
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Price
+                </Typography>
+              </Grid>
+            </Grid>
+
+            <Grid sx={{ minWidth: "90px" }}>
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="baseline"
+              >
+                <Typography
+                  variant="subtitle1"
+                  color={grey[800]}
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Total
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
 
           {renderCartItem.length > 0 ? renderCartItem : "No items are added to the cart."}
 

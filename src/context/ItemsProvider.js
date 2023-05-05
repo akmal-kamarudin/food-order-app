@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const ItemsProvider = ({ children }) => {
   const API_URL = "https://freeimage.host/api/1/upload";
-  // const PROXY_URL = "https://cors-anywhere.herokuapp.com";
+  const PROXY_URL = "https://cors-anywhere.herokuapp.com";
   const apiKey = process.env.REACT_APP_IMAGE_API_KEY;
 
   const navigate = useNavigate();
@@ -16,12 +16,13 @@ const ItemsProvider = ({ children }) => {
   );
 
   const uploadImage = async (foodImage) => {
+    console.log(foodImage);
     try {
       const formData = new FormData();
       formData.append("source", foodImage);
       const response = await axios.post(
-        // `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
-        `${API_URL}?key=${apiKey}&format=json&action=upload`,
+        `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
+        // `${API_URL}?key=${apiKey}&format=json&action=upload`,
         formData,
         {
           headers: {

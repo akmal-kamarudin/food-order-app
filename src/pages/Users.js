@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Banner from "../components/Banner";
 import AboutUs from "../components/AboutUs";
 import Meals from "../components/Meals";
-import CartAppBar from "../components/CartAppBar";
+import CartAppBar from "../components/CartAppbar";
 import CartModal from "../components/CartModal";
 
 const Users = () => {

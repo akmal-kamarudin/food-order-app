@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { SnackbarProvider } from "notistack";
 import Sidebar from "../components/Sidebar";
 import Main from "../components/Main";
-import CartAppBar from "../components/CartAppBar";
+import CartAppBar from "../components/CartAppbar";
 import OrderModal from "../components/OrderModal";
 import { Grid } from "@mui/material";
 
