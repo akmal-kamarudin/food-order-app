@@ -6,7 +6,7 @@ import { Box, Grid, Modal, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 const CartModal = (props) => {
-  const { isValid, hideModalHandler } = props;
+  const { isValid, hideModalHandler, showOrderModal } = props;
   const { items, addItem, removeItem, totalAmount } = useContext(CartContext);
 
   // Display Cart Items
@@ -100,7 +100,7 @@ const CartModal = (props) => {
   };
 
   return (
-    <div>
+    <>
       <Modal keepMounted open={isValid} onClose={hideModalHandler}>
         <Box sx={cartStyle}>
           <Typography variant="h6" color={grey[800]} sx={{ fontWeight: "bold", mb: 2 }}>
@@ -150,13 +150,13 @@ const CartModal = (props) => {
               textTransform: "capitalize",
               mt: 2,
             }}
-            // onClick={() => deleteHandler(food.id)}
+            onClick={showOrderModal}
           >
             Order
           </DarkButton>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 };
 

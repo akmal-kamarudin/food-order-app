@@ -42,7 +42,7 @@ const CartAppBar = (props) => {
               }}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
-              onClick={switchPage === "/" ? modalHandler : modalHandler}
+              onClick={modalHandler}
             >
               <Avatar sx={{ bgcolor: "transparent" }}>
                 <ShoppingCartIcon

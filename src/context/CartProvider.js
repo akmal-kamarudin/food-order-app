@@ -13,45 +13,57 @@ const CartProvider = ({ children }) => {
   );
 
   const addItem = (food) => {
-    const existingItemIndex = items.findIndex((item) => item.id === food.id);
+    const itemIndex = items.findIndex((item) => item.id === food.id);
 
-    if (existingItemIndex >= 0) {
-      const updatedCart = [...items];
-      updatedCart[existingItemIndex] = {
-        ...updatedCart[existingItemIndex],
-        multiplier: updatedCart[existingItemIndex].multiplier + 1,
+    if (itemIndex >= 0) {
+      const food = [...items];
+      food[itemIndex] = {
+        ...food[itemIndex],
+        multiplier: food[itemIndex].multiplier + 1,
+        total: updateItemsTotal(food[itemIndex], food[itemIndex].multiplier + 1),
       };
-      setItems(updatedCart);
-      console.log(updatedCart);
+
+      setItems(food);
     } else {
       const newItem = {
-        multiplier: 1,
         ...food,
+        multiplier: 1,
+        total: food.price,
       };
-      console.log(newItem);
 
       setItems((items) => [...items, newItem]);
     }
   };
 
   const removeItem = (id) => {
-    const existingItemIndex = items.findIndex((item) => item.id === id);
+    const itemIndex = items.findIndex((item) => item.id === id);
     const existingItem = items.find((item) => item.id === id);
 
-    if (existingItemIndex >= 0 && existingItem.multiplier > 1) {
-      const updatedCart = [...items];
-      updatedCart[existingItemIndex] = {
-        ...updatedCart[existingItemIndex],
-        multiplier: updatedCart[existingItemIndex].multiplier - 1,
+    if (itemIndex >= 0 && existingItem.multiplier > 1) {
+      const food = [...items];
+      food[itemIndex] = {
+        ...food[itemIndex],
+        multiplier: food[itemIndex].multiplier - 1,
+        total: updateItemsTotal(food[itemIndex], food[itemIndex].multiplier - 1),
       };
-      setItems(updatedCart);
-      console.log(updatedCart);
+      setItems(food);
+      console.log(food);
     } else {
       const newCartList = items.filter((food) => {
         return food.id !== id;
       });
       setItems(newCartList);
     }
+  };
+
+  const updateItemsTotal = (food, multiplier) => {
+    const itemPrice = parseFloat(food.price);
+    const itemMultiplier = multiplier;
+    const itemTotalPrice = itemPrice * itemMultiplier;
+    const roundedPrice = itemTotalPrice.toFixed(2);
+    console.log(roundedPrice);
+
+    return roundedPrice;
   };
 
   useEffect(() => {
@@ -69,24 +81,6 @@ const CartProvider = ({ children }) => {
     console.log(roundedTotal);
     setTotalAmount(roundedTotal);
   }, [items]);
-
-  const updateItemsTotal = (items) => {
-    const updatedItems = items.map((food) => {
-      const itemPrice = parseFloat(food.price);
-      const itemMultiplier = food.multiplier;
-      const itemTotalPrice = itemPrice * itemMultiplier;
-      const roundedPrice = itemTotalPrice.toFixed(2);
-      console.log(roundedPrice);
-
-      return { ...food, total: roundedPrice };
-    });
-
-    setItems(updatedItems);
-  };
-
-  useEffect(() => {
-    updateItemsTotal(items);
-  }, [totalAmount]);
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY2, JSON.stringify(items));

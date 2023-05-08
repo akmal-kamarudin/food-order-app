@@ -3,27 +3,44 @@ import React, { useState } from "react";
 import Banner from "../components/Banner";
 import AboutUs from "../components/AboutUs";
 import Meals from "../components/Meals";
-import CartAppBar from "../components/CartAppbar";
+import CartAppBar from "../components/CartAppBar";
 import CartModal from "../components/CartModal";
+import OrderModal from "../components/OrderModal";
+import { Grid } from "@mui/material";
 
 const Users = () => {
   const [isValid, setIsValid] = useState(false);
-  const showModalHandler = () => setIsValid(true);
-  const hideModalHandler = () => setIsValid(false);
+  const showCartModal = () => setIsValid(true);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const showOrderModal = () => {
+    setIsValid(false);
+    setIsOpen(true);
+  };
+
+  const hideModalHandler = () => {
+    setIsValid(false);
+    setIsOpen(false);
+  };
 
   return (
     <>
-      {/* <CartProvider> */}
-      <CartAppBar modalHandler={showModalHandler} />
-      {isValid && <CartModal isValid={isValid} hideModalHandler={hideModalHandler} />}
+      <CartAppBar modalHandler={showCartModal} />
+      {isValid && (
+        <CartModal
+          isValid={isValid}
+          hideModalHandler={hideModalHandler}
+          showOrderModal={showOrderModal}
+        />
+      )}
+      {isOpen && <OrderModal isOpen={isOpen} hideModalHandler={hideModalHandler} />}
       <Banner />
       <section>
         <AboutUs />
-        <div style={{ marginTop: "15rem" }}>
+        <Grid sx={{ mt: "15rem" }}>
           <Meals />
-        </div>
+        </Grid>
       </section>
-      {/* </CartProvider> */}
     </>
   );
 };
