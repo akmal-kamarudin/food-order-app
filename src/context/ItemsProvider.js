@@ -4,9 +4,10 @@ import ItemsContext from "./ItemsContext";
 import { useNavigate } from "react-router-dom";
 
 const ItemsProvider = ({ children }) => {
-  const API_URL = "https://freeimage.host/api/1/upload";
-  const PROXY_URL = "https://cors-anywhere.herokuapp.com";
+  // const API_URL = "https://freeimage.host/api/1/upload";
+  // const PROXY_URL = "https://cors-anywhere.herokuapp.com";
   const apiKey = process.env.REACT_APP_IMAGE_API_KEY;
+  const API_URL = "https://api.imgbb.com/1/upload";
 
   const navigate = useNavigate();
   const [switchPage, setSwitchPage] = useState("/");
@@ -15,13 +16,36 @@ const ItemsProvider = ({ children }) => {
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []
   );
 
+  // const uploadImage = async (foodImage) => {
+  //   console.log(foodImage);
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("image", foodImage);
+
+  //     const response = await axios.post(`${API_URL}`, formData, {
+  //       params: {
+  //         key: apiKey,
+  //         expiration: 2592000,
+  //       },
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     });
+
+  //     return response.data.data.url;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   const uploadImage = async (foodImage) => {
     console.log(foodImage);
     try {
       const formData = new FormData();
-      formData.append("source", foodImage);
+      formData.append("image", foodImage);
       const response = await axios.post(
-        `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
+        `${API_URL}?expiration=2592000&key=${apiKey}`,
+        // `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
         // `${API_URL}?key=${apiKey}&format=json&action=upload`,
         formData,
         {
@@ -30,9 +54,8 @@ const ItemsProvider = ({ children }) => {
           },
         }
       );
-      // const data = await response.data;
-      // console.log(data);
-      return await response.data.image.url;
+      return await response.data.data.url;
+      // return await response.data.image.url;
     } catch (error) {
       console.error(error);
     }
@@ -59,12 +82,6 @@ const ItemsProvider = ({ children }) => {
 
     setItemsData(newFoodList);
   };
-
-  // const updateItem = (id, updatedItem) => {
-  //   setItemsData((prevData) =>
-  //     prevData.map((item) => (item.id === id ? updatedItem : item))
-  //   );
-  // };
 
   const togglePage = (page) => {
     console.log("page:", page);
@@ -93,7 +110,6 @@ const ItemsProvider = ({ children }) => {
     uploadImage,
     addNewItem,
     removeItem,
-    // updateItem,
     togglePage,
   };
 

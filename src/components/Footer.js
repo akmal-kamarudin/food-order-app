@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import ItemsContext from "../context/ItemsContext";
 import "../App.css";
 import LightButton from "../assets/LightButton";
@@ -17,7 +17,6 @@ const Footer = () => {
     <>
       <Grid
         container
-        spacing={0}
         direction={"column"}
         alignItems={"center"}
         justifyContent={"center"}
@@ -30,18 +29,6 @@ const Footer = () => {
           <Box
             component="img"
             sx={{
-              // height: {
-              //   xs: "30%",
-              //   md: "60%",
-              //   lg: "100%",
-              // },
-              // width: {
-              //   xs: "auto",
-              //   md: "auto",
-              //   lg: "auto",
-              // },
-              // height: "auto",
-              // width: "auto",
               maxHeight: 180,
               maxWidth: 255,
               py: 2,

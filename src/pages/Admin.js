@@ -5,6 +5,7 @@ import Main from "../components/Main";
 import CartAppBar from "../components/CartAppBar";
 import OrderModal from "../components/OrderModal";
 import { Grid } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 const Admin = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,11 +17,11 @@ const Admin = () => {
       <SnackbarProvider>
         <CartAppBar modalHandler={showOrderModal} />
         {isOpen && <OrderModal isOpen={isOpen} hideModalHandler={hideModalHandler} />}
-        <Grid container direction="row" sx={{ height: "80vh" }}>
-          <Grid item lg={2} xs={3}>
+        <Grid container direction="row">
+          <Grid item lg={2} xs={3} sx={{ bgcolor: grey[200] }}>
             <Sidebar />
           </Grid>
-          <Grid item lg={10} xs={9}>
+          <Grid item lg={10} xs={9} sx={{ bgcolor: grey[400] }}>
             <Main />
           </Grid>
         </Grid>

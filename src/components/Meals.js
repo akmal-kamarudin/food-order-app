@@ -23,18 +23,18 @@ const Meals = () => {
         direction="column"
         justifyContent="center"
         alignItems="center"
-        sx={{ bgcolor: grey[400] }}
+        sx={{ bgcolor: grey[600] }}
       >
         <Typography variant="h5" color={grey[900]} sx={{ fontWeight: "bold", mt: 2 }}>
           Available Food
         </Typography>
-        <Box sx={{ flexGrow: 1, m: 8 }}>
+        <Box sx={{ flexGrow: 1, m: 10 }}>
           {renderFoodItem.length > 0 ? (
             <>
               <Grid
                 container
-                spacing={{ xs: 2, md: 3 }}
-                columns={{ xs: 1, sm: 2, md: 4 }}
+                spacing={{ xs: 4, md: 6 }}
+                columns={{ xs: 1, sm: 2, md: 3 }}
               >
                 {renderFoodItem}
               </Grid>

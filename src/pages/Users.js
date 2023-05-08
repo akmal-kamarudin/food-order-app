@@ -35,12 +35,10 @@ const Users = () => {
       )}
       {isOpen && <OrderModal isOpen={isOpen} hideModalHandler={hideModalHandler} />}
       <Banner />
-      <section>
-        <AboutUs />
-        <Grid sx={{ mt: "15rem" }}>
-          <Meals />
-        </Grid>
-      </section>
+      <AboutUs />
+      <Grid>
+        <Meals />
+      </Grid>
     </>
   );
 };

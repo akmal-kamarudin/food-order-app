@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AdminForm from "./AdminForm";
 import Meals from "./Meals";
 import DarkButton from "../assets/DarkButton";
-import { Grid, Box } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 const Main = () => {
@@ -12,39 +12,34 @@ const Main = () => {
 
   return (
     <>
-      <Grid
-        container
-        direction="column"
-        justifyContent="flex-start"
-        alignItems="center"
-        sx={{ bgcolor: grey[200] }}
-      >
-        <Grid>
-          <Box sx={{ flex: 4 }}>
-            {isValid ? (
-              <AdminForm hideAddItemForm={hideAddItemForm} />
-            ) : (
-              <DarkButton
-                variant="contained"
-                size="medium"
-                sx={{
-                  borderRadius: 2,
-                  m: 3,
-                  // height: {
-                  //   xs: "2rem",
-                  //   md: "2.4rem",
-                  //   lg: "2.8rem",
-                  // },
-                }}
-                onClick={showAddItemForm}
-              >
-                Add Food Item
-              </DarkButton>
-            )}
-          </Box>
+      <Grid container direction="column" justifyContent="center" alignItems="center">
+        <Typography variant="h5" color={grey[900]} sx={{ fontWeight: "bold", m: 5 }}>
+          Add Food Items
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          color={grey[900]}
+          sx={{ fontWeight: "bold", m: 2 }}
+        >
+          *Click on the button 'Add Food Item' to add more meals to the menu.
+        </Typography>
+
+        <Grid sx={{ mb: 20 }}>
+          {isValid ? (
+            <AdminForm hideAddItemForm={hideAddItemForm} />
+          ) : (
+            <DarkButton
+              variant="contained"
+              size="medium"
+              sx={{ borderRadius: 2 }}
+              onClick={showAddItemForm}
+            >
+              Add Food Item
+            </DarkButton>
+          )}
         </Grid>
         <Grid>
-          <Meals sx={{ overflowY: "scroll" }} />
+          <Meals />
         </Grid>
       </Grid>
     </>
