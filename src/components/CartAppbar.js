@@ -10,7 +10,7 @@ const CartAppBar = (props) => {
   const { switchPage } = useContext(ItemsContext);
   const { items } = useContext(CartContext);
 
-  const cartItemsCount = items.length; // Replace with the actual number of items in the cart
+  const cartItemsCount = items.length;
   const { modalHandler } = props;
 
   const [isHover, setIsHover] = useState(false);
@@ -25,7 +25,7 @@ const CartAppBar = (props) => {
             position: "fixed",
             top: "1%",
             right: "1%",
-            zIndex: 1,
+            zIndex: 5,
           }}
         >
           <Toolbar>
@@ -35,7 +35,7 @@ const CartAppBar = (props) => {
               sx={{
                 borderRadius: 10,
                 height: {
-                  xs: "2.4rem",
+                  xs: "2.6rem",
                   md: "2.8rem",
                   lg: "3rem",
                 },
@@ -48,8 +48,8 @@ const CartAppBar = (props) => {
                 <ShoppingCartIcon
                   sx={{
                     fontSize: {
-                      xs: "1.2rem",
-                      md: "1.4rem",
+                      xs: "1.4rem",
+                      md: "1.5rem",
                       lg: "1.6rem",
                     },
                     color: isHover ? grey[900] : grey[100],
@@ -62,8 +62,8 @@ const CartAppBar = (props) => {
                   fontWeight: "bold",
                   textTransform: "capitalize",
                   fontSize: {
-                    xs: "0.7rem",
-                    md: "0.8rem",
+                    xs: "0.8rem",
+                    md: "0.9rem",
                     lg: "0.9rem",
                   },
                 }}

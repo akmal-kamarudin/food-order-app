@@ -17,11 +17,11 @@ const Admin = () => {
       <SnackbarProvider>
         <CartAppBar modalHandler={showOrderModal} />
         {isOpen && <OrderModal isOpen={isOpen} hideModalHandler={hideModalHandler} />}
-        <Grid container direction="row">
-          <Grid item lg={2} xs={3} sx={{ bgcolor: grey[200] }}>
+        <Grid container direction="row" sx={{ minWidth: 640, minHeight: 660 }}>
+          <Grid item lg={2} md={2} sm={3} xs={3} sx={{ bgcolor: grey[50] }}>
             <Sidebar />
           </Grid>
-          <Grid item lg={10} xs={9} sx={{ bgcolor: grey[400] }}>
+          <Grid item lg={10} md={10} sm={9} xs={9} sx={{ bgcolor: grey[200] }}>
             <Main />
           </Grid>
         </Grid>

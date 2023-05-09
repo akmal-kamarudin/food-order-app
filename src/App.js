@@ -13,13 +13,13 @@ function App() {
       <ItemsProvider>
         <CartProvider>
           <Grid container direction="column">
-            <Grid item xs={10}>
+            <Grid item>
               <Routes>
                 <Route path="/" exact element={<Users />} />
                 <Route path="/admin" element={<Admin />} />
               </Routes>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item>
               <Footer />
             </Grid>
           </Grid>

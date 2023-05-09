@@ -6,14 +6,14 @@ const Sidebar = () => {
     <>
       <Grid>
         <Typography
-          variant="h5"
+          variant="h4"
           sx={{
             p: 2,
             fontWeight: "bold",
             fontSize: {
-              xs: "1.1rem",
-              sm: "1.3rem",
-              lg: "1.5rem",
+              xs: "1.5rem",
+              sm: "1.6rem",
+              lg: "1.8rem",
             },
           }}
         >

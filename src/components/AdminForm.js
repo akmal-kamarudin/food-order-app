@@ -118,12 +118,7 @@ const AdminForm = (props) => {
 
   return (
     <>
-      <Grid container direction="column" justifyContent="center" alignItems="center">
-        <Grid>
-          <Typography variant="h5" color={grey[900]} sx={{ fontWeight: "bold", mt: 2 }}>
-            Add Food Items
-          </Typography>
-        </Grid>
+      <Grid>
         <form onSubmit={handleSubmit}>
           <Grid
             container

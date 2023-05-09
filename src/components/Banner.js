@@ -46,8 +46,8 @@ const Banner = () => {
               letterSpacing: "0.2em",
               m: 1,
               fontSize: {
-                xs: "1.5rem",
-                md: "2rem",
+                xs: "2.2rem",
+                md: "2.8rem",
                 lg: "3rem",
               },
             }}
@@ -62,7 +62,7 @@ const Banner = () => {
               letterSpacing: "0.1em",
               m: 1,
               fontSize: {
-                xs: "0.8rem",
+                xs: "1rem",
                 md: "1.2rem",
                 lg: "1.6rem",
               },
@@ -80,8 +80,8 @@ const Banner = () => {
               borderRadius: 8,
               m: 4,
               fontSize: {
-                xs: "0.6rem",
-                md: "0.8rem",
+                xs: "0.7rem",
+                md: "0.9rem",
                 lg: "1rem",
               },
             }}
@@ -92,8 +92,8 @@ const Banner = () => {
                 letterSpacing: "0.1em",
                 fontWeight: "bold",
                 fontSize: {
-                  xs: "0.6rem",
-                  md: "0.8rem",
+                  xs: "0.7rem",
+                  md: "0.9rem",
                   lg: "1rem",
                 },
               }}

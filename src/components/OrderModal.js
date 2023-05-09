@@ -27,7 +27,11 @@ const OrderModal = (props) => {
       <Modal keepMounted open={isOpen} onClose={hideModalHandler}>
         <Box sx={cartStyle}>
           <Grid container direction="column" justifyContent="center" alignItems="center">
-            <Typography variant="h5" color={grey[800]} sx={{ fontWeight: "bold" }}>
+            <Typography
+              variant="h4"
+              color={grey[800]}
+              sx={{ fontWeight: "bold", letterSpacing: "0.1em" }}
+            >
               SHINE DINE
             </Typography>
             <Typography variant="subtitle1" color={grey[800]} sx={{ fontWeight: "bold" }}>

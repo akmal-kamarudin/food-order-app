@@ -13,18 +13,30 @@ const Main = () => {
   return (
     <>
       <Grid container direction="column" justifyContent="center" alignItems="center">
-        <Typography variant="h5" color={grey[900]} sx={{ fontWeight: "bold", m: 5 }}>
+        <Typography
+          variant="h4"
+          color={grey[900]}
+          sx={{
+            fontWeight: "bold",
+            m: 5,
+            fontSize: {
+              xs: "1.6rem",
+              md: "1.8rem",
+              lg: "2.2rem",
+            },
+          }}
+        >
           Add Food Items
         </Typography>
         <Typography
-          variant="subtitle1"
+          variant="subtitle2"
           color={grey[900]}
           sx={{ fontWeight: "bold", m: 2 }}
         >
           *Click on the button 'Add Food Item' to add more meals to the menu.
         </Typography>
 
-        <Grid sx={{ mb: 20 }}>
+        <Grid sx={{ mb: 5 }}>
           {isValid ? (
             <AdminForm hideAddItemForm={hideAddItemForm} />
           ) : (
