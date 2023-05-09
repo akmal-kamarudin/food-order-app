@@ -16,57 +16,55 @@ const ItemsProvider = ({ children }) => {
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []
   );
 
+  const uploadImage = async (foodImage) => {
+    try {
+      const formData = new FormData();
+      formData.append("image", foodImage);
+
+      const response = await axios.post(`${API_URL}`, formData, {
+        params: {
+          key: apiKey,
+          expiration: 2592000,
+        },
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      return response.data.data.url;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // const uploadImage = async (foodImage) => {
   //   console.log(foodImage);
   //   try {
   //     const formData = new FormData();
   //     formData.append("image", foodImage);
-
-  //     const response = await axios.post(`${API_URL}`, formData, {
-  //       params: {
-  //         key: apiKey,
-  //         expiration: 2592000,
-  //       },
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     });
-
-  //     return response.data.data.url;
+  //     const response = await axios.post(
+  //       `${API_URL}?expiration=2592000&key=${apiKey}`,
+  //       // `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
+  //       // `${API_URL}?key=${apiKey}&format=json&action=upload`,
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+  //     return await response.data.data.url;
+  //     // return await response.data.image.url;
   //   } catch (error) {
   //     console.error(error);
   //   }
   // };
-
-  const uploadImage = async (foodImage) => {
-    console.log(foodImage);
-    try {
-      const formData = new FormData();
-      formData.append("image", foodImage);
-      const response = await axios.post(
-        `${API_URL}?expiration=2592000&key=${apiKey}`,
-        // `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
-        // `${API_URL}?key=${apiKey}&format=json&action=upload`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return await response.data.data.url;
-      // return await response.data.image.url;
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const addNewItem = (item) => {
     const newItem = {
       id: crypto.randomUUID(),
       ...item,
     };
-    console.log(newItem);
 
     setItemsData((prevItem) => [...prevItem, newItem]);
   };
@@ -84,9 +82,6 @@ const ItemsProvider = ({ children }) => {
   };
 
   const togglePage = (page) => {
-    console.log("page:", page);
-    console.log(switchPage);
-
     if (page === "/" || page === null) {
       setSwitchPage("/admin");
       navigate("/admin");

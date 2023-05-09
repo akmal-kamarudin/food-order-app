@@ -16,7 +16,7 @@ const Admin = () => {
     <>
       <SnackbarProvider>
         <CartAppBar modalHandler={showOrderModal} />
-        {isOpen && <OrderModal isOpen={isOpen} hideModalHandler={hideModalHandler} />}
+        <OrderModal isOpen={isOpen} hideModalHandler={hideModalHandler} />
         <Grid container direction="row" sx={{ minWidth: 640, minHeight: 660 }}>
           <Grid item lg={2} md={2} sm={3} xs={3} sx={{ bgcolor: grey[50] }}>
             <Sidebar />

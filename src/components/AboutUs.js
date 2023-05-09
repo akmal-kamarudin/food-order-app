@@ -96,7 +96,16 @@ const AboutUs = () => {
           >
             Eum sapiente quae sed perspiciatis internos ut fugiat libero. Est quasi vitae
             non voluptates minus est iure placeat est expedita dolore ut neque tempora et
-            obcaecati possimus.
+            obcaecati possimus.{" "}
+            <a
+              style={{
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+              href="#"
+            >
+              Learn More..
+            </a>
           </Typography>
         </Grid>
 
@@ -121,7 +130,7 @@ const AboutUs = () => {
                 md: "normal",
                 lg: "absolute",
               },
-              transition: "transform 0.2s ease-in-out",
+              transition: "transform 0.15s ease-in-out",
               "&:hover": {
                 transform: "scale(1.1)",
               },
@@ -142,7 +151,7 @@ const AboutUs = () => {
                 md: "normal",
                 lg: "absolute",
               },
-              transition: "transform 0.2s ease-in-out",
+              transition: "transform 0.15s ease-in-out",
               "&:hover": {
                 transform: "scale(1.1)",
               },
@@ -163,7 +172,7 @@ const AboutUs = () => {
                 md: "normal",
                 lg: "absolute",
               },
-              transition: "transform 0.2s ease-in-out",
+              transition: "transform 0.15s ease-in-out",
               "&:hover": {
                 transform: "scale(1.1)",
               },

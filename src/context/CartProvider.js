@@ -47,7 +47,6 @@ const CartProvider = ({ children }) => {
         total: updateItemsTotal(food[itemIndex], food[itemIndex].multiplier - 1),
       };
       setItems(food);
-      console.log(food);
     } else {
       const newCartList = items.filter((food) => {
         return food.id !== id;
@@ -61,7 +60,6 @@ const CartProvider = ({ children }) => {
     const itemMultiplier = multiplier;
     const itemTotalPrice = itemPrice * itemMultiplier;
     const roundedPrice = itemTotalPrice.toFixed(2);
-    console.log(roundedPrice);
 
     return roundedPrice;
   };
@@ -78,7 +76,6 @@ const CartProvider = ({ children }) => {
     }
 
     const roundedTotal = calculatedTotal.toFixed(2);
-    console.log(roundedTotal);
     setTotalAmount(roundedTotal);
   }, [items]);
 

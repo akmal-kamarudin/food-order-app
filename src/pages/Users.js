@@ -27,14 +27,12 @@ const Users = () => {
     <>
       <Grid container direction="column" sx={{ minWidth: 650, minHeight: 500 }}>
         <CartAppBar modalHandler={showCartModal} />
-        {isValid && (
-          <CartModal
-            isValid={isValid}
-            hideModalHandler={hideModalHandler}
-            showOrderModal={showOrderModal}
-          />
-        )}
-        {isOpen && <OrderModal isOpen={isOpen} hideModalHandler={hideModalHandler} />}
+        <CartModal
+          isValid={isValid}
+          hideModalHandler={hideModalHandler}
+          showOrderModal={showOrderModal}
+        />
+        <OrderModal isOpen={isOpen} hideModalHandler={hideModalHandler} />
         <Banner />
         <Grid sx={{ bgcolor: grey[200] }}>
           <AboutUs />

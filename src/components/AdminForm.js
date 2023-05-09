@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import ItemsContext from "../context/ItemsContext";
 import { useSnackbar } from "notistack";
 import DarkButton from "../assets/DarkButton";
-import { Grid, Typography, TextField, OutlinedInput } from "@mui/material";
-import { blueGrey, grey } from "@mui/material/colors";
+import { Grid, TextField, OutlinedInput } from "@mui/material";
+import { blueGrey } from "@mui/material/colors";
 
 const AdminForm = (props) => {
   const inputRef = useRef(null);
@@ -44,10 +44,7 @@ const AdminForm = (props) => {
 
       return;
     } else {
-      console.log("uploading...");
-
       const imageUrl = await uploadImage(foodData.imageFile);
-      console.log(imageUrl);
 
       setFoodData((food) => ({
         ...food,
@@ -55,13 +52,10 @@ const AdminForm = (props) => {
       }));
       setErrorMessage("success");
     }
-
-    console.log(foodData);
   };
 
   useEffect(() => {
     if (foodData.imageLink !== null) {
-      console.log(foodData);
       const { imageFile, ...food } = foodData;
       addNewItem(food);
       setFoodData({

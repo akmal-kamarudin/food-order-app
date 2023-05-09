@@ -20,7 +20,6 @@ const MealsItem = (props) => {
 
   // Delete Food
   const deleteHandler = (id) => {
-    console.log(id);
     removeItem(id);
   };
 
