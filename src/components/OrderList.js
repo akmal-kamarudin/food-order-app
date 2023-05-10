@@ -6,7 +6,7 @@ import { grey } from "@mui/material/colors";
 const OrderList = () => {
   const { items } = useContext(CartContext);
 
-  // Display Cart Items
+  // Display Order List
   const renderCartItem = items.map((cartItem) => {
     return (
       <Grid item key={cartItem.id}>

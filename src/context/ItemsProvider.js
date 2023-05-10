@@ -4,8 +4,6 @@ import ItemsContext from "./ItemsContext";
 import { useNavigate } from "react-router-dom";
 
 const ItemsProvider = ({ children }) => {
-  // const API_URL = "https://freeimage.host/api/1/upload";
-  // const PROXY_URL = "https://cors-anywhere.herokuapp.com";
   const apiKey = process.env.REACT_APP_IMAGE_API_KEY;
   const API_URL = "https://api.imgbb.com/1/upload";
 
@@ -16,6 +14,7 @@ const ItemsProvider = ({ children }) => {
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []
   );
 
+  // Upload Image
   const uploadImage = async (foodImage) => {
     try {
       const formData = new FormData();
@@ -37,29 +36,7 @@ const ItemsProvider = ({ children }) => {
     }
   };
 
-  // const uploadImage = async (foodImage) => {
-  //   console.log(foodImage);
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("image", foodImage);
-  //     const response = await axios.post(
-  //       `${API_URL}?expiration=2592000&key=${apiKey}`,
-  //       // `${PROXY_URL}/${API_URL}?key=${apiKey}&format=json`,
-  //       // `${API_URL}?key=${apiKey}&format=json&action=upload`,
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     );
-  //     return await response.data.data.url;
-  //     // return await response.data.image.url;
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
+  // Add Item to Food List
   const addNewItem = (item) => {
     const newItem = {
       id: crypto.randomUUID(),
@@ -69,10 +46,7 @@ const ItemsProvider = ({ children }) => {
     setItemsData((prevItem) => [...prevItem, newItem]);
   };
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(itemsData));
-  }, [itemsData]);
-
+  // Delete Item from Food List
   const removeItem = (id) => {
     const newFoodList = itemsData.filter((food) => {
       return food.id !== id;
@@ -81,6 +55,11 @@ const ItemsProvider = ({ children }) => {
     setItemsData(newFoodList);
   };
 
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(itemsData));
+  }, [itemsData]);
+
+  // Toggle Page Switch
   const togglePage = (page) => {
     if (page === "/" || page === null) {
       setSwitchPage("/admin");
@@ -97,7 +76,7 @@ const ItemsProvider = ({ children }) => {
     } else {
       navigate("/admin");
     }
-  }, [switchPage]);
+  }, [switchPage, navigate]);
 
   const contextValue = {
     itemsData,

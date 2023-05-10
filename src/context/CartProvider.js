@@ -12,6 +12,7 @@ const CartProvider = ({ children }) => {
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY3)) ?? 0
   );
 
+  // Add Item to Cart List
   const addItem = (food) => {
     const itemIndex = items.findIndex((item) => item.id === food.id);
 
@@ -35,6 +36,7 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  // Remove Item from Cart List
   const removeItem = (id) => {
     const itemIndex = items.findIndex((item) => item.id === id);
     const existingItem = items.find((item) => item.id === id);
@@ -55,6 +57,7 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  // Calculate each Item's price
   const updateItemsTotal = (food, multiplier) => {
     const itemPrice = parseFloat(food.price);
     const itemMultiplier = multiplier;
@@ -64,6 +67,7 @@ const CartProvider = ({ children }) => {
     return roundedPrice;
   };
 
+  // Calculate Total Price
   useEffect(() => {
     let calculatedTotal = 0;
 

@@ -23,6 +23,7 @@ const MealsItem = (props) => {
     removeItem(id);
   };
 
+  // Add Food
   const addHandler = (food) => {
     addItem(food);
   };

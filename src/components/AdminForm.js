@@ -22,6 +22,7 @@ const AdminForm = (props) => {
     imageLink: null,
   });
 
+  // Submit Form button
   const handleSubmit = async (e) => {
     e.preventDefault();
 

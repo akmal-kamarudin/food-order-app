@@ -39,16 +39,17 @@ const Banner = () => {
           }}
         >
           <Typography
-            variant="h3"
+            variant={"h1"}
             color={grey[50]}
             sx={{
               fontWeight: "bold",
               letterSpacing: "0.2em",
               m: 1,
               fontSize: {
-                xs: "2.2rem",
-                md: "2.8rem",
-                lg: "3rem",
+                xs: "2.5rem",
+                sm: "3.2rem",
+                md: "4rem",
+                lg: "5rem",
               },
             }}
           >
@@ -74,7 +75,7 @@ const Banner = () => {
             variant="contained"
             color="primary"
             size="large"
-            type="submit"
+            href="#"
             sx={{
               width: "15ch",
               borderRadius: 8,
