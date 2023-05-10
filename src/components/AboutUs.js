@@ -2,7 +2,7 @@ import React from "react";
 import pic1 from "../images/about-pic1.jpg";
 import pic2 from "../images/about-pic2.jpg";
 import pic3 from "../images/about-pic5.jpg";
-import { Grid, Box, Typography } from "@mui/material";
+import { Grid, Box, Typography, Button } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 const AboutUs = () => {
@@ -96,16 +96,17 @@ const AboutUs = () => {
           >
             Eum sapiente quae sed perspiciatis internos ut fugiat libero. Est quasi vitae
             non voluptates minus est iure placeat est expedita dolore ut neque tempora et
-            obcaecati possimus.{" "}
-            <a
+            obcaecati possimus.
+            <Button
+              variant="text"
               style={{
+                fontWeight: "bold",
                 textDecoration: "underline",
-                cursor: "pointer",
               }}
               href="#"
             >
-              Learn More..
-            </a>
+              Learn More ...
+            </Button>
           </Typography>
         </Grid>
 
