@@ -72,6 +72,7 @@ const Meals = () => {
                   md: "1.4rem",
                   lg: "1.6rem",
                 },
+                textAlign: "center",
               }}
             >
               Sorry, no Foods are available

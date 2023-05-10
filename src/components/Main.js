@@ -31,7 +31,7 @@ const Main = () => {
         <Typography
           variant="subtitle2"
           color={grey[900]}
-          sx={{ fontWeight: "bold", m: 2 }}
+          sx={{ fontWeight: "bold", textAlign: "center", m: 2 }}
         >
           *Click on the button 'Add Food Item' to add more meals to the menu.
         </Typography>
